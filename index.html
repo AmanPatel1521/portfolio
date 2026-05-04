@@ -105,18 +105,14 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
   .nav-links{display:none}
 }
 
-/* CURSOR */
-#cursor{position:fixed;width:12px;height:12px;background:var(--purple);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,opacity .3s;mix-blend-mode:screen}
-#cursor-trail{position:fixed;width:36px;height:36px;border:1.5px solid rgba(167,139,250,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,opacity .3s}
-body:hover #cursor{opacity:1}#cursor.hidden{opacity:0}#cursor-trail.hidden{opacity:0}
+
 /* ANIMATIONS */
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-trail"></div>
+
 
 <nav>
   <div class="logo">&lt;aman.dev /&gt;</div>
@@ -354,31 +350,7 @@ new Typed('#typed-text', {
   smartBackspace: true
 });
 
-// ── Custom cursor
-const cur = document.getElementById('cursor');
-const trail = document.getElementById('cursor-trail');
-let mx = 0, my = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px';
-  cur.style.top  = my + 'px';
-  setTimeout(() => {
-    trail.style.left = mx + 'px';
-    trail.style.top  = my + 'px';
-  }, 80);
-});
-document.querySelectorAll('a,button,.btn,.project-card,.fact-card,.skill-category').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cur.style.transform = 'translate(-50%,-50%) scale(2.5)';
-    cur.style.background = 'var(--purple-light)';
-    trail.style.borderColor = 'rgba(167,139,250,.7)';
-  });
-  el.addEventListener('mouseleave', () => {
-    cur.style.transform = 'translate(-50%,-50%) scale(1)';
-    cur.style.background = 'var(--purple)';
-    trail.style.borderColor = 'rgba(167,139,250,.4)';
-  });
-});
+
 
 // ── Nav active state
 const sections = document.querySelectorAll('section[id]');
