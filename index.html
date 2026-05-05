@@ -87,7 +87,10 @@ section{padding:5rem 2rem}
 .project-card:hover::before{opacity:1}
 .project-card:hover{border-color:var(--purple);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
 .project-card:focus-visible{outline:2px solid var(--purple-light);outline-offset:4px}
-.project-icon{display:flex;align-items:center;margin-bottom:1rem;color:var(--purple-light)}
+.project-icon{font-size:2rem;margin-bottom:1rem}
+.project-preview{width:100%;height:160px;border-radius:8px;overflow:hidden;margin-bottom:1rem;border:1px solid var(--border)}
+.project-preview img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease;display:block}
+.project-card:hover .project-preview img{transform:scale(1.06)}
 .project-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
 .project-card p{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:1rem}
 .project-langs{display:flex;flex-wrap:wrap;gap:.4rem}
@@ -300,45 +303,50 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
     <div class="projects-grid">
       <a href="https://github.com/AmanPatel1521/Sudoku-multi_frontend" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="0" title="Built in flow state">
         <span class="project-link" aria-hidden="true">↗</span>
-        <div class="project-icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+        <div class="project-preview">
+          <img src="previews/sudoku.png" alt="Multiplayer Sudoku game screenshot" loading="lazy"/>
         </div>
+        <div class="project-icon">♟️</div>
         <h3>Multiplayer Sudoku</h3>
         <p>Real-time competitive Sudoku with WebSocket-powered live gameplay. PWA-ready & stress-tested for 500+ concurrent users with Python/Flask backend.</p>
         <div class="project-langs"><span class="lang-badge">HTML</span><span class="lang-badge">Python</span><span class="lang-badge">WebSockets</span><span class="lang-badge">Flask</span></div>
       </a>
       <a href="https://github.com/AmanPatel1521/market-insights-ai" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="80" title="Built in flow state">
         <span class="project-link" aria-hidden="true">↗</span>
-        <div class="project-icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <div class="project-preview">
+          <img src="previews/market-ai.png" alt="Market Insights AI dashboard screenshot" loading="lazy"/>
         </div>
+        <div class="project-icon">📈</div>
         <h3>Market Insights AI</h3>
         <p>AI-powered stock market dashboard that reads chart images and generates actionable trade signals using AI vision models.</p>
         <div class="project-langs"><span class="lang-badge">TypeScript</span><span class="lang-badge">AI Vision</span><span class="lang-badge">React</span></div>
       </a>
       <a href="https://github.com/AmanPatel1521/sti-ai-mate" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="160" title="Built in flow state">
         <span class="project-link" aria-hidden="true">↗</span>
-        <div class="project-icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <div class="project-preview">
+          <img src="previews/sti-ai.png" alt="STI AI Mate study companion screenshot" loading="lazy"/>
         </div>
+        <div class="project-icon">🎓</div>
         <h3>STI AI Mate</h3>
         <p>Multilingual AI study companion for students covering Gujarati, History & more. Built on Supabase + React with a clean accessible UI.</p>
         <div class="project-langs"><span class="lang-badge">TypeScript</span><span class="lang-badge">Supabase</span><span class="lang-badge">React</span></div>
       </a>
       <a href="https://github.com/AmanPatel1521/smart-marketplace" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="240" title="Built in flow state">
         <span class="project-link" aria-hidden="true">↗</span>
-        <div class="project-icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <div class="project-preview">
+          <img src="previews/marketplace.png" alt="Smart Marketplace e-commerce screenshot" loading="lazy"/>
         </div>
+        <div class="project-icon">🛑️</div>
         <h3>Smart Marketplace</h3>
         <p>Full-stack e-commerce platform with product listings, cart, auth and more. Built on Next.js + Prisma with clean architecture.</p>
         <div class="project-langs"><span class="lang-badge">Next.js</span><span class="lang-badge">Prisma</span><span class="lang-badge">TypeScript</span></div>
       </a>
       <a href="https://github.com/AmanPatel1521/trp-banquets" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="320" title="Built in flow state">
         <span class="project-link" aria-hidden="true">↗</span>
-        <div class="project-icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        <div class="project-preview">
+          <img src="previews/banquets.png" alt="TRP Banquets website screenshot" loading="lazy"/>
         </div>
+        <div class="project-icon">🍽️</div>
         <h3>TRP Banquets</h3>
         <p>Professional website for a banquet business. Elegant design with full event showcase, contact, and booking experience.</p>
         <div class="project-langs"><span class="lang-badge">JavaScript</span><span class="lang-badge">HTML</span><span class="lang-badge">CSS</span></div>
