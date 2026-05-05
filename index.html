@@ -4,6 +4,12 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Aman Patel — Full-Stack Developer & AI Builder</title>
+<meta name="description" content="Aman Patel — Full-Stack Developer building AI-powered products in Finance, Ed-Tech & real-time systems. React, Next.js, Python, Flask, Supabase."/>
+<meta property="og:title" content="Aman Patel — Portfolio"/>
+<meta property="og:description" content="Full-Stack Developer · AI Builder · Real-Time Systems"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Aman Patel — Portfolio"/>
 <link rel="stylesheet" href="https://unpkg.com/oatcss@1.0.0/dist/oat.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
@@ -77,7 +83,7 @@ section{padding:5rem 2rem}
 .project-card p{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:1rem}
 .project-langs{display:flex;flex-wrap:wrap;gap:.4rem}
 .lang-badge{background:rgba(124,58,237,.15);color:var(--purple-light);font-size:.75rem;padding:.2rem .6rem;border-radius:4px;font-family:'Fira Code',monospace}
-.vibe-tag{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(236,72,153,.12));border:1px solid rgba(236,72,153,.25);color:#f9a8d4;font-size:.72rem;padding:.2rem .6rem;border-radius:4px;font-family:'Fira Code',monospace;letter-spacing:.03em}
+
 .project-link{position:absolute;top:1.5rem;right:1.5rem;color:var(--muted);font-size:1.1rem;transition:color .3s}
 .project-card:hover .project-link{color:var(--purple-light)}
 
@@ -95,20 +101,40 @@ section{padding:5rem 2rem}
 
 /* FOOTER */
 footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);font-family:'Fira Code',monospace}
-.vibe-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(236,72,153,.15));border:1px solid rgba(124,58,237,.3);color:var(--purple-light);padding:.4rem 1rem;border-radius:999px;font-size:.8rem;margin-top:.8rem;letter-spacing:.05em}
-.vibe-badge span{background:linear-gradient(135deg,var(--purple-light),#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;border:none;background:transparent}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 2rem;gap:.25rem;z-index:99}
+.nav-mobile.open{display:flex}
+.nav-mobile a{color:var(--muted);text-decoration:none;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.95rem;transition:color .3s}
+.nav-mobile a:last-child{border-bottom:none}
+.nav-mobile a:hover{color:var(--purple-light)}
+
+/* HERO ELEMENT STATES (GSAP-controlled) */
+#hero-tag-wrap{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;opacity:0}
+#hero-title,#hero-sub,#hero-btns{opacity:0}
+
+/* BTN SMALL */
+.btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
 
 /* RESPONSIVE */
 @media(max-width:768px){
   .about-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .nav-links{display:none}
+  .hamburger{display:flex}
 }
-
 
 /* ANIMATIONS */
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
 .fade-up.visible{opacity:1;transform:translateY(0)}
+/* GSAP fallback if scripts fail to load */
+.gsap-fallback #hero-tag-wrap,.gsap-fallback #hero-title,
+.gsap-fallback #hero-sub,.gsap-fallback #hero-btns{opacity:1!important;transform:none!important}
 </style>
 </head>
 <body>
@@ -122,19 +148,28 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="https://github.com/AmanPatel1521" target="_blank" class="btn btn-outline" style="padding:.5rem 1.2rem;font-size:.85rem">GitHub ↗</a>
+  <a href="https://github.com/AmanPatel1521" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Mobile navigation">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</div>
 
-<section class="hero">
+<section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem" id="hero-tag-wrap">
-      <div class="hero-tag" style="margin-bottom:0">✦ Available for opportunities</div>
+    <div id="hero-tag-wrap">
+      <div class="hero-tag">✦ Available for opportunities</div>
     </div>
-    <h1 id="hero-title" style="opacity:0">Hi, I'm <span>Aman Patel</span></h1>
-    <p class="hero-sub" id="hero-sub" style="opacity:0">Full-Stack Developer &mdash; <span id="typed-text"></span></p>
-    <div class="hero-btns" id="hero-btns" style="opacity:0">
+    <h1 id="hero-title">Hi, I'm <span>Aman Patel</span></h1>
+    <p class="hero-sub" id="hero-sub">Full-Stack Developer &mdash; <span id="typed-text"></span></p>
+    <div class="hero-btns" id="hero-btns">
       <a href="#projects" class="btn btn-primary">View Projects</a>
       <a href="#contact" class="btn btn-outline">Get in Touch</a>
     </div>
@@ -145,14 +180,14 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
   </div>
 </section>
 
-<div class="stats-band">
+<section class="stats-band" aria-label="Stats">
   <div class="stats-grid">
     <div><div class="stat-val">6+</div><div class="stat-label">Projects Shipped</div></div>
     <div><div class="stat-val">500+</div><div class="stat-label">Concurrent Users Tested</div></div>
     <div><div class="stat-val">5</div><div class="stat-label">Languages & Frameworks</div></div>
     <div><div class="stat-val">∞</div><div class="stat-label">Lines of Ambition</div></div>
   </div>
-</div>
+</section>
 
 <section id="about">
   <div class="container">
@@ -249,42 +284,42 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
     <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Featured <span>Projects</span></h2>
     <p class="section-desc" data-aos="fade-up" data-aos-delay="150">Real products, real users, real impact.</p>
     <div class="projects-grid">
-      <a href="https://github.com/AmanPatel1521/Sudoku-multi_frontend" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="0" title="Built in flow state">
+      <a href="https://github.com/AmanPatel1521/Sudoku-multi_frontend" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="0" title="Built in flow state">
         <span class="project-link">↗</span>
         <div class="project-icon">♟️</div>
         <h3>Multiplayer Sudoku</h3>
         <p>Real-time competitive Sudoku with WebSocket-powered live gameplay. PWA-ready & stress-tested for 500+ concurrent users with Python/Flask backend.</p>
         <div class="project-langs"><span class="lang-badge">HTML</span><span class="lang-badge">Python</span><span class="lang-badge">WebSockets</span><span class="lang-badge">Flask</span></div>
       </a>
-      <a href="https://github.com/AmanPatel1521/market-insights-ai" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="80" title="Built in flow state">
+      <a href="https://github.com/AmanPatel1521/market-insights-ai" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="80" title="Built in flow state">
         <span class="project-link">↗</span>
         <div class="project-icon">📈</div>
         <h3>Market Insights AI</h3>
         <p>AI-powered stock market dashboard that reads chart images and generates actionable trade signals using AI vision models.</p>
         <div class="project-langs"><span class="lang-badge">TypeScript</span><span class="lang-badge">AI Vision</span><span class="lang-badge">React</span></div>
       </a>
-      <a href="https://github.com/AmanPatel1521/sti-ai-mate" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="160" title="Built in flow state">
+      <a href="https://github.com/AmanPatel1521/sti-ai-mate" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="160" title="Built in flow state">
         <span class="project-link">↗</span>
         <div class="project-icon">🎓</div>
         <h3>STI AI Mate</h3>
         <p>Multilingual AI study companion for students covering Gujarati, History & more. Built on Supabase + React with a clean accessible UI.</p>
         <div class="project-langs"><span class="lang-badge">TypeScript</span><span class="lang-badge">Supabase</span><span class="lang-badge">React</span></div>
       </a>
-      <a href="https://github.com/AmanPatel1521/smart-marketplace" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="240" title="Built in flow state">
+      <a href="https://github.com/AmanPatel1521/smart-marketplace" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="240" title="Built in flow state">
         <span class="project-link">↗</span>
         <div class="project-icon">🛍️</div>
         <h3>Smart Marketplace</h3>
         <p>Full-stack e-commerce platform with product listings, cart, auth and more. Built on Next.js + Prisma with clean architecture.</p>
         <div class="project-langs"><span class="lang-badge">Next.js</span><span class="lang-badge">Prisma</span><span class="lang-badge">TypeScript</span></div>
       </a>
-      <a href="https://github.com/AmanPatel1521/trp-banquets" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="320" title="Built in flow state">
+      <a href="https://github.com/AmanPatel1521/trp-banquets" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="320" title="Built in flow state">
         <span class="project-link">↗</span>
         <div class="project-icon">🍽️</div>
         <h3>TRP Banquets</h3>
         <p>Professional website for a banquet business. Elegant design with full event showcase, contact, and booking experience.</p>
         <div class="project-langs"><span class="lang-badge">JavaScript</span><span class="lang-badge">HTML</span><span class="lang-badge">CSS</span></div>
       </a>
-      <a href="https://github.com/AmanPatel1521" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="400" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:220px">
+      <a href="https://github.com/AmanPatel1521" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="400" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:220px">
         <div style="font-size:2rem">🔭</div>
         <h3 style="margin-top:.8rem">More on GitHub</h3>
         <p>Explore all repositories and see what I'm working on next.</p>
@@ -300,15 +335,15 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
       <h2 class="section-title" data-aos="fade-up" data-aos-delay="100" style="text-align:center">Let's <span>Connect</span></h2>
       <p class="section-desc" data-aos="fade-up" data-aos-delay="150" style="text-align:center;max-width:100%">Open to freelance projects, full-time roles, or just a great conversation about tech and ideas.</p>
       <div class="contact-links" data-aos="fade-up" data-aos-delay="200">
-        <a href="https://github.com/AmanPatel1521" target="_blank" class="contact-card">
+        <a href="https://github.com/AmanPatel1521" target="_blank" rel="noopener noreferrer" class="contact-card">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
-        <a href="mailto:amanpatel@example.com" class="contact-card">
+        <a href="mailto:your@email.com" class="contact-card" title="Update with your real email">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
           Email Me
         </a>
-        <a href="https://linkedin.com" target="_blank" class="contact-card">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-card">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
@@ -328,12 +363,23 @@ footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:.85rem
 // ── AOS init
 AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 80 });
 
-// ── GSAP hero entrance
-gsap.timeline({ delay: 0.2 })
-  .to('#hero-tag-wrap', { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0)
-  .to('#hero-title',    { opacity:1, y:0, duration:.7, ease:'power3.out' }, 0.25)
-  .to('#hero-sub',      { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0.45)
-  .to('#hero-btns',     { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0.6);
+// ── GSAP hero entrance + fallback
+try {
+  gsap.timeline({ delay: 0.2 })
+    .to('#hero-tag-wrap', { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0)
+    .to('#hero-title',    { opacity:1, y:0, duration:.7, ease:'power3.out' }, 0.25)
+    .to('#hero-sub',      { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0.45)
+    .to('#hero-btns',     { opacity:1, y:0, duration:.6, ease:'power3.out' }, 0.6);
+} catch(e) {
+  document.body.classList.add('gsap-fallback');
+}
+// Safety net: reveal hero if GSAP stalls after 3s
+setTimeout(() => {
+  ['hero-tag-wrap','hero-title','hero-sub','hero-btns'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.style.opacity === '0') el.style.opacity = '1';
+  });
+}, 3000);
 
 // ── Typed.js
 new Typed('#typed-text', {
@@ -350,17 +396,38 @@ new Typed('#typed-text', {
   smartBackspace: true
 });
 
+// ── Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('nav-mobile');
+hamburger.addEventListener('click', () => {
+  const isOpen = navMobile.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+navMobile.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navMobile.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
 
-
-// ── Nav active state
+// ── Nav active state (rAF throttled)
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
+let ticking = false;
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 200) current = s.id });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--purple-light)' : '';
-  });
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      let current = '';
+      sections.forEach(s => { if(window.scrollY >= s.offsetTop - 200) current = s.id; });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--purple-light)' : '';
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }
 });
 </script>
 </body>
